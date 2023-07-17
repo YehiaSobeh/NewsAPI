@@ -112,7 +112,17 @@ def controller(URL):
     "Top_Image": "Top_Image",
     "source_url": "source_url"
 } """
-    json_file = ML_Model.fun(URL)
+    arab = ML_Model.analyze_article(URL,"ar")
+    eng =ML_Model.analyze_article(URL,"en")
+    rus =ML_Model.analyze_article(URL,"ru")
+    """ json_file = ML_Model.analyze_article(URL,"en") """
+    if arab:
+        json_file = arab
+    if eng:
+        json_file = eng
+    if rus:
+        json_file = rus
+    
 
 
     """ html_file = WebSiteFetching.get_website(URL)
@@ -145,7 +155,7 @@ def controller(URL):
      """
 
     
-    
+    json_file = json.dumps(json_file)
     encoded_url = encode_url(URL)
    
     file_name = encoded_url  + ".json"
